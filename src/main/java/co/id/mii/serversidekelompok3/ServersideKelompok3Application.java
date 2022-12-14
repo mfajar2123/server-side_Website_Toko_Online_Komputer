@@ -8,6 +8,7 @@ public class ServersideKelompok3Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ServersideKelompok3Application.class, args);
+                System.out.println("Serverside is Running.....");
 	}
 
 }
