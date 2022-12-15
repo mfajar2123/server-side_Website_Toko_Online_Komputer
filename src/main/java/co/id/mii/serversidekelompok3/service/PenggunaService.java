@@ -30,11 +30,11 @@ public class PenggunaService {
     }
 
       public Pengguna create(Pengguna pengguna) {
-       Pengguna existingPengguna = penggunaRepository.findByNama(pengguna.getNama()).orElse(null);
+       Pengguna existingPengguna = penggunaRepository.findByUsername(pengguna.getUsername()).orElse(null);
         if (existingPengguna == null && pengguna.getId() == null) {
             return penggunaRepository.save(pengguna);
         } else {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "id atau nama pengguna sudah ada!");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "id atau username pengguna sudah ada!!");
         }
     }
 

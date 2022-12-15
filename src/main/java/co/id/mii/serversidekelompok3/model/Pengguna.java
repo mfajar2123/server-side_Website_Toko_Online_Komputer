@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package co.id.mii.serversidekelompok3.model;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,6 +43,9 @@ public class Pengguna {
     
     @Column(nullable = false)
     private String nama;
+    
+    @Column(nullable = false, unique = true)
+    private String email;
      
     @Column(nullable = false)
     private String alamat;
@@ -51,7 +55,7 @@ public class Pengguna {
 
     private Boolean isAktif;
      
-     
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "tb_pengguna_role",
