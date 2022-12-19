@@ -25,11 +25,15 @@ public class AppUserDetailService implements UserDetailsService{
 
     private PenggunaRepository penggunaRepository;
 
-    @Override
     public UserDetails loadPenggunaByUsername(String username) throws UsernameNotFoundException {
         Pengguna pengguna = penggunaRepository.findByUsername(username)
                 .orElseThrow(()-> new UsernameNotFoundException("Username atau Password salah"));
         return new AppUserDetail(pengguna);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
