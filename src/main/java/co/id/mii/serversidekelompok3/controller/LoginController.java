@@ -5,10 +5,27 @@
  */
 package co.id.mii.serversidekelompok3.controller;
 
-/**
- *
- * @author LENOVO
- */
+
+import co.id.mii.serversidekelompok3.model.dto.Request.LoginRequest;
+import co.id.mii.serversidekelompok3.model.dto.Response.LoginResponse;
+import co.id.mii.serversidekelompok3.service.LoginService;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+@RequestMapping("/login")
+@AllArgsConstructor
 public class LoginController {
+    
+    private LoginService loginService;
+    
+    @PostMapping
+    public LoginResponse login(@RequestBody LoginRequest loginRequest){
+        return loginService.login(loginRequest);
+    }
     
 }

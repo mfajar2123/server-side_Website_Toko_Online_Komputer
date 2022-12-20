@@ -55,16 +55,14 @@ public class AppUserDetail implements UserDetails {
     }
     @Override
     public boolean isAccountNonLocked() {
-        return !pengguna.getIsAktif(); // Verifikasi Akun
+        return !pengguna.getIsAccountLocked(); // Verifikasi Akun
     }
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
     @Override
     public boolean isEnabled() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return pengguna.getIsEnabled(); // Menonaktifkan atau mengaktifkan Akun
     }
-    
 }

@@ -53,7 +53,8 @@ public class Pengguna {
     @Column(nullable = false)
     private String no_hp;
 
-    private Boolean isAktif;
+    private Boolean isAccountLocked;
+    private Boolean isEnabled;
      
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(fetch = FetchType.EAGER)
