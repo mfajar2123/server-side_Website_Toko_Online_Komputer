@@ -5,50 +5,68 @@
  */
 package co.id.mii.serversidekelompok3.service;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import co.id.mii.serversidekelompok3.model.Pengguna;
+import co.id.mii.serversidekelompok3.model.Role;
+import co.id.mii.serversidekelompok3.model.dto.Request.PenggunaRequest;
 import co.id.mii.serversidekelompok3.repository.PenggunaRepository;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-
+/**
+ *
+ * @author MSI-JO
+ */
 @Service
+@AllArgsConstructor
 public class PenggunaService {
 
-    @Autowired
     private PenggunaRepository penggunaRepository;
+    private RoleService roleService;
+    private PasswordEncoder passwordEncoder;
 
-    public Pengguna getById(Long id) {
-        return penggunaRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pengguna dengan id " + id + " tidak ditemukan!!"));
-    }
-
-     public List<Pengguna> getAll() {
+    public List<Pengguna> getAll() {
         return penggunaRepository.findAll();
     }
-
-      public Pengguna create(Pengguna pengguna) {
-       Pengguna existingPengguna = penggunaRepository.findByUsername(pengguna.getUsername()).orElse(null);
-        if (existingPengguna == null && pengguna.getId() == null) {
-            return penggunaRepository.save(pengguna);
-        } else {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "id atau username pengguna sudah ada!!");
-        }
+    public Pengguna getById(Long id) {
+        return penggunaRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pengguna not found"));
     }
+//     ModelMapper (JUMAT)
+    public Pengguna create(PenggunaRequest penggunaRequest) {
+        Pengguna pengguna = new Pengguna();
+        pengguna.setNama(penggunaRequest.getNama());
+        pengguna.setEmail(penggunaRequest.getEmail());
+        pengguna.setNo_hp(penggunaRequest.getNo_hp());
+        pengguna.setAlamat(penggunaRequest.getAlamat());
+        pengguna.setUsername(penggunaRequest.getUsername());
+        pengguna.setPassword(passwordEncoder.encode(penggunaRequest.getPassword()));
 
-    public Pengguna update(Long id, Pengguna pengguna) {
-        getById(id);
-        pengguna.setId(id);
+        
+
+        List<Role> roles = new ArrayList<>();
+        roles.add(roleService.getById(2L));
+        pengguna.setRoles(roles);
+        
+      
         return penggunaRepository.save(pengguna);
     }
-
-     public Pengguna delete(Long id) {
-       Pengguna pengguna = getById(id);
+    public Pengguna update(Long id, Pengguna pengguna) {
+        Pengguna oldData = getById(id);
+        pengguna.setId(id);
+        pengguna.setUsername(oldData.getUsername());
+        pengguna.setPassword(oldData.getPassword());
+        
+        return penggunaRepository.save(pengguna);
+    }
+    
+    public Pengguna delete(Long id){
+        Pengguna pengguna = getById(id);
         penggunaRepository.delete(pengguna);
         return pengguna;
     }
-    
 }
-
