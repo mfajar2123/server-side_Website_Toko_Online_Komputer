@@ -46,7 +46,7 @@ public class Pesanan {
     private String email;
     
     @Column(nullable = false)   
-    private int alamat;
+    private String alamat;
     
     
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -54,8 +54,11 @@ public class Pesanan {
     @ManyToOne
     private Pengguna pengguna;
     
+    @JoinColumn
+    @ManyToOne
+    private Produk produk;
     
-    
-    
+    @Column(nullable = false)   
+    private int jumlah;
     
 }
