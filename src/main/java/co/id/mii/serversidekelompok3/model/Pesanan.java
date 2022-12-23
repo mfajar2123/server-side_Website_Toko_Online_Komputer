@@ -40,23 +40,14 @@ public class Pesanan {
     private Long id;
     
     @Column(nullable = false)   
-    private String nomor;
+    private String nama;
     
-    @Temporal(TemporalType.DATE)
-    @Column
-    private Date tanggal;
-    
-    @Column   
-    private String alamat;
+    @Column (nullable = false)
+    private String email;
     
     @Column(nullable = false)   
-    private int jumlah;
+    private int alamat;
     
-    @Column(nullable = false)   
-    private BigDecimal total;
-    
-    @Enumerated(EnumType.STRING)  
-    private StatusPesanan statusPesanan;
     
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @JoinColumn
