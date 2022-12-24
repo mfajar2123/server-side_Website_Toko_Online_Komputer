@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import co.id.mii.serversidekelompok3.model.Kategori;
 import co.id.mii.serversidekelompok3.repository.KategoriRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.server.ResponseStatusException;
 
 
@@ -19,6 +21,12 @@ public class KategoriService {
 
     @Autowired
     private KategoriRepository kategoriRepository;
+    
+    @Autowired
+    private JavaMailSender mailSender;
+    
+    @Autowired
+    private EmailService emailService; 
 
     public Kategori getById(Long id) {
         return kategoriRepository.findById(id)
@@ -46,9 +54,8 @@ public class KategoriService {
 
      public Kategori delete(Long id) {
        Kategori kategori = getById(id);
-        kategoriRepository.delete(kategori);
-        return kategori;
+       emailService.sendEmail("ilhamakunyangbaru@gmail.com", "Pesanan Berhasil", "Hi Ilham, Pesanan mu telah diterima!");
+       kategoriRepository.delete(kategori);
+       return kategori;
     }
-    
 }
-
