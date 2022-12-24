@@ -11,8 +11,9 @@ import org.springframework.stereotype.Service;
 import co.id.mii.serversidekelompok3.model.Kategori;
 import co.id.mii.serversidekelompok3.repository.KategoriRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.server.ResponseStatusException;
-
 
 @Service
 public class KategoriService {
@@ -20,17 +21,24 @@ public class KategoriService {
     @Autowired
     private KategoriRepository kategoriRepository;
 
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Autowired
+    private EmailService emailService;
+
     public Kategori getById(Long id) {
         return kategoriRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Kategori dengan id " + id + " tidak ditemukan!!"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Kategori dengan id " + id + " tidak ditemukan!!"));
     }
 
-     public List<Kategori> getAll() {
+    public List<Kategori> getAll() {
         return kategoriRepository.findAll();
     }
 
-      public Kategori create(Kategori kategori) {
-       Kategori existingKategori = kategoriRepository.findByNama(kategori.getNama()).orElse(null);
+    public Kategori create(Kategori kategori) {
+        Kategori existingKategori = kategoriRepository.findByNama(kategori.getNama()).orElse(null);
         if (existingKategori == null && kategori.getId() == null) {
             return kategoriRepository.save(kategori);
         } else {
@@ -44,11 +52,11 @@ public class KategoriService {
         return kategoriRepository.save(kategori);
     }
 
-     public Kategori delete(Long id) {
-       Kategori kategori = getById(id);
+    public Kategori delete(Long id) {
+        Kategori kategori = getById(id);
+        emailService.sendEmail("ilhamakunyangbaru@gmail.com", "Pesanan Berhasil",
+                "Hi Ilham, Pesanan mu telah diterima!");
         kategoriRepository.delete(kategori);
         return kategori;
     }
-    
 }
-

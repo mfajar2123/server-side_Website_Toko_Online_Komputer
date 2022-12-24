@@ -17,5 +17,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PesananRepository extends JpaRepository<Pesanan, Long>{
-   Optional<Pesanan> findByNomor(String pesanan);
 }

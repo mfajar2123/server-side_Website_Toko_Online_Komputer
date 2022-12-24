@@ -37,7 +37,7 @@ public class Role {
     @Column(nullable = false)   
     private String nama;
     
-   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "roles")
     private List<Pengguna> pengguna;
 

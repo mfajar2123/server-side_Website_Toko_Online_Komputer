@@ -5,7 +5,6 @@
  */
 package co.id.mii.serversidekelompok3.controller;
 
-
 import co.id.mii.serversidekelompok3.model.Pengguna;
 import co.id.mii.serversidekelompok3.model.dto.Request.PenggunaRequest;
 import co.id.mii.serversidekelompok3.service.PenggunaService;
@@ -32,20 +31,22 @@ import org.springframework.web.bind.annotation.RestController;
 @PreAuthorize("hasRole('PENGGUNA')")
 public class PenggunaController {
     private PenggunaService penggunaService;
-    
+
     @Autowired
     public PenggunaController(PenggunaService penggunaService) {
         this.penggunaService = penggunaService;
     }
+
     @PreAuthorize("hasAuthority('READ_PENJUAL')")
     @GetMapping
-    public ResponseEntity<List<Pengguna>> getAll(){
-        return new ResponseEntity(penggunaService.getAll(),HttpStatus.OK);
+    public ResponseEntity<List<Pengguna>> getAll() {
+        return new ResponseEntity(penggunaService.getAll(), HttpStatus.OK);
     }
+
     @PreAuthorize("hasAuthority('READ_PENGGUNA')")
-    @GetMapping("/{id}") 
-    public ResponseEntity<Pengguna> getById(@PathVariable Long id){
-        return new ResponseEntity(penggunaService.getById(id),HttpStatus.OK);
+    @GetMapping("/{id}")
+    public ResponseEntity<Pengguna> getById(@PathVariable Long id) {
+        return new ResponseEntity(penggunaService.getById(id), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAnyAuthority('CREATE_PENGGUNA','CREATE_PENJUAL')")
@@ -53,14 +54,16 @@ public class PenggunaController {
     public Pengguna create(@RequestBody PenggunaRequest penggunaRequest) {
         return penggunaService.create(penggunaRequest);
     }
- @PreAuthorize("hasAuthority('UPDATE_PENGGUNA')")
+
+    @PreAuthorize("hasAuthority('UPDATE_PENGGUNA')")
     @PutMapping("/{id}")
-    public ResponseEntity<Pengguna> Update(@PathVariable Long id,@RequestBody Pengguna pengguna){
-        return new ResponseEntity(penggunaService.update(id,pengguna), HttpStatus.CREATED);
+    public ResponseEntity<Pengguna> Update(@PathVariable Long id, @RequestBody Pengguna pengguna) {
+        return new ResponseEntity(penggunaService.update(id, pengguna), HttpStatus.CREATED);
     }
- @PreAuthorize("hasAuthority('DELETE_PENGGUNA')")
+
+    @PreAuthorize("hasAuthority('DELETE_PENGGUNA')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Pengguna> Delete(@PathVariable Long id){
+    public ResponseEntity<Pengguna> Delete(@PathVariable Long id) {
         return new ResponseEntity(penggunaService.delete(id), HttpStatus.OK);
     }
 }
