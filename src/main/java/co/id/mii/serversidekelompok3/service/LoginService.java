@@ -8,7 +8,7 @@ package co.id.mii.serversidekelompok3.service;
 
 import co.id.mii.serversidekelompok3.model.Pengguna;
 import co.id.mii.serversidekelompok3.model.dto.Request.LoginRequest;
-import co.id.mii.serversidekelompok3.model.dto.Response.LoginResponse;
+import co.id.mii.serversidekelompok3.model.dto.response.LoginResponse;
 import co.id.mii.serversidekelompok3.repository.PenggunaRepository;
 import java.util.List;
 import java.util.stream.Collectors;

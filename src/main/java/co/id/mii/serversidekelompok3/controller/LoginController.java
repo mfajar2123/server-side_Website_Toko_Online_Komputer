@@ -7,7 +7,7 @@ package co.id.mii.serversidekelompok3.controller;
 
 
 import co.id.mii.serversidekelompok3.model.dto.Request.LoginRequest;
-import co.id.mii.serversidekelompok3.model.dto.Response.LoginResponse;
+import co.id.mii.serversidekelompok3.model.dto.response.LoginResponse;
 import co.id.mii.serversidekelompok3.service.LoginService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
