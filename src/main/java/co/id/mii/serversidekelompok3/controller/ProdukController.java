@@ -49,17 +49,19 @@ public class ProdukController {
         return new ResponseEntity(produkService.getById(id),HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyAuthority('CREATE_PENGGUNA','CREATE_PENJUAL')")
+    @PreAuthorize("hasAuthority('CREATE_PENJUAL')")
     @PostMapping
     public Produk create(@RequestBody Produk produk) {
         return produkService.create(produk);
     }
- @PreAuthorize("hasAnyAuthority('UPDATE_PENGGUNA','UPDATE_PENJUAL')")
+    
+    @PreAuthorize("hasAuthority('UPDATE_PENJUAL')")
     @PutMapping("/{id}")
     public ResponseEntity<Produk> Update(@PathVariable Long id,@RequestBody Produk produk){
         return new ResponseEntity(produkService.update(id,produk), HttpStatus.CREATED);
     }
- @PreAuthorize("hasAuthority('DELETE_PENGGUNA')")
+    
+    @PreAuthorize("hasAuthority('DELETE_PENJUAL')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Produk> Delete(@PathVariable Long id){
         return new ResponseEntity(produkService.delete(id), HttpStatus.OK);

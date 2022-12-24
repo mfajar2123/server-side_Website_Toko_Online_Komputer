@@ -30,7 +30,12 @@ public class PesananService {
     }
 
       public Pesanan create(Pesanan pesanan) {
-        return pesananRepository.save(pesanan);
+       Pesanan existingPesanan = pesananRepository.findByNama(pesanan.getNama()).orElse(null);
+        if (existingPesanan == null && pesanan.getId() == null) {
+            return pesananRepository.save(pesanan);
+        } else {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "id atau nama pesanan sudah ada!");
+        }
     }
 
     public Pesanan update(Long id, Pesanan pesanan) {

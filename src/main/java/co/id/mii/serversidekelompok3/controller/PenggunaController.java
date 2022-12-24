@@ -37,31 +37,31 @@ public class PenggunaController {
         this.penggunaService = penggunaService;
     }
 
-    @PreAuthorize("hasAuthority('READ_PENJUAL')")
+    @PreAuthorize("hasAnyAuthority('READ_PENGGUNA','READ_PENJUAL')")
     @GetMapping
     public ResponseEntity<List<Pengguna>> getAll() {
         return new ResponseEntity(penggunaService.getAll(), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('READ_PENGGUNA')")
+    @PreAuthorize("hasAuthority('READ_PENJUAL')")
     @GetMapping("/{id}")
     public ResponseEntity<Pengguna> getById(@PathVariable Long id) {
         return new ResponseEntity(penggunaService.getById(id), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyAuthority('CREATE_PENGGUNA','CREATE_PENJUAL')")
+    @PreAuthorize("hasAuthority('CREATE_PENJUAL')")
     @PostMapping
     public Pengguna create(@RequestBody PenggunaRequest penggunaRequest) {
         return penggunaService.create(penggunaRequest);
     }
 
-    @PreAuthorize("hasAuthority('UPDATE_PENGGUNA')")
+    @PreAuthorize("hasAuthority('UPDATE_PENJUAL')")
     @PutMapping("/{id}")
     public ResponseEntity<Pengguna> Update(@PathVariable Long id, @RequestBody Pengguna pengguna) {
         return new ResponseEntity(penggunaService.update(id, pengguna), HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasAuthority('DELETE_PENGGUNA')")
+    @PreAuthorize("hasAuthority('DELETE_PENJUAL')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Pengguna> Delete(@PathVariable Long id) {
         return new ResponseEntity(penggunaService.delete(id), HttpStatus.OK);

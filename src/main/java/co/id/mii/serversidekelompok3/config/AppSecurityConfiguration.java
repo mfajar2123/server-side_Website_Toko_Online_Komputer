@@ -53,8 +53,8 @@ public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 //               .antMatchers("/login/**").permitAll()
                   
-                .antMatchers("/produk/**").hasAnyRole("PENGGUNA", "PENJUAL")
-                .antMatchers("/pengguna/**").hasRole("PENJUAL")
+//                .antMatchers("/produk/**").hasAnyRole("PENGGUNA", "PENJUAL")
+//                .antMatchers("/pengguna/**").hasRole("PENJUAL")
                 . antMatchers(HttpMethod.POST,"/login/**").permitAll()
                 . antMatchers(HttpMethod.POST,"/pengguna").permitAll()
 //                . antMatchers(HttpMethod.POST,"/produk").permitAll()
