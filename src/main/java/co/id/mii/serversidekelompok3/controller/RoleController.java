@@ -37,7 +37,7 @@ public class RoleController {
     public RoleController(RoleService roleService) {
         this.roleService = roleService;
     }
-    @PreAuthorize("hasAuthority('READ_PENJUAL','READ_PENGGUNA')")
+    @PreAuthorize("hasAnyAuthority('READ_PENJUAL','READ_PENGGUNA')")
     @GetMapping
     public ResponseEntity<List<Role>> getAll(){
         return new ResponseEntity(roleService.getAll(),HttpStatus.OK);
