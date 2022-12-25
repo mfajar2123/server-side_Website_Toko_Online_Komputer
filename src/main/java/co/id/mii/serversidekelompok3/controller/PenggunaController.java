@@ -43,7 +43,7 @@ public class PenggunaController {
         return new ResponseEntity(penggunaService.getAll(), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('READ_PENJUAL')")
+    @PreAuthorize("hasAnyAuthority('READ_PENGGUNA','READ_PENJUAL')")
     @GetMapping("/{id}")
     public ResponseEntity<Pengguna> getById(@PathVariable Long id) {
         return new ResponseEntity(penggunaService.getById(id), HttpStatus.OK);
@@ -55,7 +55,7 @@ public class PenggunaController {
         return penggunaService.create(penggunaRequest);
     }
 
-    @PreAuthorize("hasAuthority('UPDATE_PENJUAL')")
+    @PreAuthorize("hasAnyAuthority('UPDATE_PENGGUNA','UPDATE_PENJUAL')")
     @PutMapping("/{id}")
     public ResponseEntity<Pengguna> Update(@PathVariable Long id, @RequestBody Pengguna pengguna) {
         return new ResponseEntity(penggunaService.update(id, pengguna), HttpStatus.CREATED);

@@ -60,6 +60,9 @@ public class PenggunaService {
         pengguna.setId(id);
         pengguna.setUsername(oldData.getUsername());
         pengguna.setPassword(oldData.getPassword());
+        pengguna.setRoles(oldData.getRoles());
+        pengguna.setIsAccountLocked(oldData.getIsAccountLocked());
+        pengguna.setIsEnabled(oldData.getIsEnabled());
         
         return penggunaRepository.save(pengguna);
     }
