@@ -28,4 +28,14 @@ public class EmailService {
         System.out.println("Simple Mail Send .........");
         mailSender.send(message); 
     }
+    
+    public void sendEmailDisapprove(String to, String subject, String body){
+       SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(body);
+        message.setFrom("TokoKomputer@gmail.com");
+        System.out.println("Simple Mail Send .........");
+        mailSender.send(message); 
+    }
 }
