@@ -24,7 +24,7 @@ public class PesananService {
     private EmailService emailService;
 
     public Pesanan getById(Long id) {
-        emailService.sendEmail("talithaas02@gmail.com", "Pesanan Berhasil",
+        emailService.sendEmail("mfajar2123@upi.edu", "Pesanan Berhasil",
                 "Dear customer, Pesanan mu diterima!");
         return pesananRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pesanan dengan id " + id + " tidak ditemukan!!"));
@@ -45,7 +45,7 @@ public class PesananService {
 
     public Pesanan update(Long id, Pesanan pesanan) {
         getById(id);
-        emailService.sendEmail("talithaas02@gmail.com", "Pesanan Berhasil",
+        emailService.sendEmail("mfajar2123@upi.edu", "Pesanan Berhasil",
                 "Dear customer, Pesanan mu diterima!");
         pesanan.setId(id);
         return pesananRepository.save(pesanan);
@@ -53,14 +53,14 @@ public class PesananService {
 
      public Pesanan delete(Long id) {
         Pesanan pesanan = getById(id);
-        emailService.sendEmailDisapprove("talithaas02@gmail.com", "Pesanan Gagal",
+        emailService.sendEmailDisapprove("mfajar2123@upi.edu", "Pesanan Gagal",
                 "Dear customer, Maaf pesanan mu tidak diterima!");
         pesananRepository.delete(pesanan);
         return pesanan;
     }
      
     public Pesanan getByEmail(Long id) {
-        emailService.sendEmail("talithaas02@gmail.com", "Pesanan Berhasil",
+        emailService.sendEmail("mfajar2123@upi.edu", "Pesanan Berhasil",
                 "Dear customer, Pesanan mu diterima!");
         return pesananRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pesanan dengan id " + id + " tidak ditemukan!!"));
